@@ -1,0 +1,110 @@
+<v-dialog persistent v-model="enableVisible" max-width="650" style="position: absolute">
+    <v-card class="pa-3">
+
+        <v-card-title class="headline light-blue--text lighten-1 pb-0 pt-5" >
+            {{title}}
+        </v-card-title>
+
+        <form @submit.prevent >
+
+            <v-card-text class="py-0">
+                <v-text-field
+                    v-model="mood.message"
+                    label="Message"
+                    :disabled="maxMoodsReaced"
+
+                    multi-line textarea color="light-blue lighten-1" 
+                    counter="200" 
+
+                    data-vv-name="message"
+                    v-validate="'required|max:200|min:10'"
+                    :error-messages="errors.collect('message')"
+                ></v-text-field>
+            </v-card-text>
+
+            <v-card-text class="py-0  py-0 grey--text lighten-1">
+                Add detail
+                <v-text-field
+                    v-model="mood.message2"
+                    label="Detail"
+                    :disabled="maxMoodsReaced"
+
+                    color="light-blue lighten-1" 
+                    counter="200" 
+
+                    data-vv-name="message2"
+                    v-validate="'max:200'"
+                    :error-messages="errors.collect('message2')"
+                ></v-text-field>
+            </v-card-text>
+
+            <v-container grid-list-md>
+                <v-layout row wrap>
+                    <v-flex xs12 sm6 text-xs-left>
+                        <v-card-text class="py-0  px-2 grey--text lighten-1">
+                            <v-select
+                                label="Category"
+                                v-bind:items="categories"
+                                v-model="category"
+                                item-text="description"
+                                item-value="description"
+                                chips
+                                max-height="300"
+                                autocomplete
+                                :browser-autocomplete="'false'"
+
+                                data-vv-name="select"
+                                v-validate="''"
+                                :error-messages="errors.collect('select')"
+                            >
+                                <template slot="selection" slot-scope="data">
+
+                                    <v-chip
+                                        close
+                                        @input="category = null;fields.select.dirty = true"
+                                        class="chip--select-multi"
+                                        :key="JSON.stringify(data.item)"
+
+                                        :color="data.item.color"
+                                        text-color="white"
+                                    >
+                                        <v-icon :color="data.item.colorIcon">{{ data.item.icon}}</v-icon>
+                                        {{ data.item.description }}
+                                    </v-chip>
+
+                                </template>
+                                
+                                <template slot="item" slot-scope="data">
+
+                                    <v-chip :color="data.item.color" text-color="white">
+                                            <v-icon :color="data.item.colorIcon">{{ data.item.icon}}</v-icon>
+                                            {{ data.item.description }}
+                                    </v-chip>
+
+                                </template>
+                            </v-select>
+                        </v-card-text>
+                    </v-flex>
+                    <v-flex xs12 sm6 text-xs-right>
+                        <v-card-text class="py-0  px-2 grey--text lighten-1">
+                            Max Moods For day {{moodsUserToday}}/4
+                        </v-card-text>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn round outline color="light-blue lighten-1" @click.native="closeModal">Cancel</v-btn>
+                <v-btn  round color="light-blue lighten-1 white--text" 
+                        :disabled="errors.any() || maxMoodsReaced || !mood.message ||
+                                    ( (fields.select?!fields.select.dirty:true) &&
+                                    (fields.message?!fields.message.dirty:true) &&
+                                    (fields.message2?!fields.message2.dirty:true) )
+                                   " @click="dispatchSave()" >Send</v-btn>
+            </v-card-actions>
+        
+        </form>
+        
+    </v-card>
+</v-dialog>

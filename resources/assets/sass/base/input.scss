@@ -1,0 +1,21 @@
+
+// input text multi line
+
+.theme--light .input-group.input-group--textarea:not(.input-group--full-width) .input-group__input{
+    border-color: #E1F5FE;
+}
+
+
+.application .theme--light.input-group:not(.input-group--error):not(.input-group--focused):not(.input-group--disabled):not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover.input-group--textarea:not(.input-group--full-width) .input-group__input, .theme--light .input-group:not(.input-group--error):not(.input-group--focused):not(.input-group--disabled):not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover.input-group--textarea:not(.input-group--full-width) .input-group__input {
+    border-color: #B3E5FC;
+} 
+
+// input text single line
+
+.application .theme--light.input-group:not(.input-group--error):not(.input-group--focused):not(.input-group--disabled):not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover .input-group__details:before, .theme--light .input-group:not(.input-group--error):not(.input-group--focused):not(.input-group--disabled):not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover .input-group__details:before {
+    background-color: #B3E5FC;
+}
+
+.application .theme--light.input-group:not(.input-group--error) .input-group__details:before, .theme--light .input-group:not(.input-group--error) .input-group__details:before{
+    background-color: rgba(225,245,254, 1);
+}

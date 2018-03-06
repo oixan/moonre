@@ -1,0 +1,47 @@
+
+<v-container class="pt-5" style="max-width: 800px;">
+    <v-layout row wrap>
+            <v-flex xs12>
+
+                    <v-card class="">
+
+                            <v-card-title class="light-blue lighten-1">
+                                <h2 class="headline mb-0 ml-2 pl-3 white--text">Delete Account</h2>
+                            </v-card-title>
+
+                            <v-card-text class="pl-5 pt-5">
+                                <p>We're sorry to hear you want to delete your account.</p>
+                            </v-card-text>
+                            
+
+                            <v-card-text class="pt-0">
+                                <v-container fluid>
+
+                                    <v-layout row wrap>
+                                        <v-flex xs12 md4>
+                                            <v-subheader>Insert Password:</v-subheader>
+                                        </v-flex>
+                                        <v-flex xs12 md8 pl-3>
+                                            <v-text-field v-model="password" type="password" name="password" label="password"></v-text-field>
+                                        </v-flex>
+                                    </v-layout>
+
+                                </v-container>
+                            </v-card-text>
+
+                            <v-card-actions class="white pr-3 pb-3">
+                                    <v-spacer></v-spacer>
+                                    <v-btn round color="light-blue lighten-1 white--text" @click="deleteUser()" >Confirm</v-btn>
+                            </v-card-actions>
+
+                    </v-card>
+
+            </v-flex>
+    </v-layout>
+
+    <v-snackbar :timeout="4000" :bottom="true" v-model="toast">
+        {{ toastMessage }}
+        <v-btn flat color="pink" @click.native="toast = false">Close</v-btn>
+    </v-snackbar>
+
+</v-container>

@@ -1,0 +1,65 @@
+<v-app class="bg-whitesmoke">
+
+        <v-container grid-list-md text-xs-center>
+                <v-layout row justify-space-around>
+                        <v-flex xs12 class="mt-5 mb-4"> 
+                                <app-logo forceLg></app-logo>
+                        </v-flex>
+                </v-layout>
+                <v-layout row justify-space-around>
+                        <v-flex xxs6 md6 lg4>
+                                
+                                <form @submit.prevent data-vv-scope="form-1">
+                                        <v-card style="max-width:430px; margin: auto;">
+                                                <v-card-title primary-title class="justify-center light-blue lighten-1" >
+                                                        <div class="headline white--text"> <strong>Log IN to Moonre </strong> </div>
+                                                </v-card-title>
+                                                <v-card-text class="px-4 pt-4">
+
+                                                        <v-text-field 
+                                                                v-model="email" type="text" name="Email"  label="Email" color="light-blue lighten-1" 
+                                                                
+                                                                data-vv-name="email"
+                                                                data-vv-delay="1000"
+                                                                v-validate="'required|email'"
+                                                                :error-messages="errors.collect('email')"
+                                                        ></v-text-field>
+
+                                                        <v-text-field 
+                                                                v-model="password" type="password" name="Password"  label="Password" color="light-blue lighten-1" 
+
+                                                                data-vv-name="password"
+                                                                data-vv-delay="700"
+                                                                v-validate="'required|min:6|max:150'"
+                                                                :error-messages="errors.collect('password')"
+                                                        ></v-text-field>
+
+                                                        <p class="text-xs-right">
+                                                                <router-link to="/">  Forget password? </router-link>
+                                                        </p> 
+                                                </v-card-text>
+                                                <v-card-text>
+                                                        <v-btn round outline color="light-blue lighten-1" large @click="login()" 
+                                                        :disabled="errors.any() || (fields.email?!fields.email.dirty:true) ||  (fields.password?!fields.password.dirty:true)" >  
+                                                                Log IN 
+                                                        </v-btn>     
+                                                </v-card-text>
+                                                <v-card-text>
+                                                        <p>
+                                                        Don't have an account yet ?
+                                                        <router-link to="/logon"> <strong>  Sign Up </strong>  </router-link>
+                                                        </p> 
+                                                </v-card-text>
+                                        </v-card>
+                                </form>
+
+                        </v-flex>
+                </v-layout>
+        </v-container>
+
+        <v-snackbar :timeout="4000" :bottom="true" v-model="toast">
+                {{ toastMessage }}
+                <v-btn flat color="pink" @click.native="toast = false">Close</v-btn>
+        </v-snackbar>
+        
+</v-app>

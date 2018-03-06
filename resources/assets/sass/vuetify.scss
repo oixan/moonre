@@ -1,0 +1,24 @@
+/* 
+ *  expansion panel 
+ */
+
+.theme--light {
+
+    .expansion-panel{
+        box-shadow: none;
+
+        
+        .expansion-panel__container{
+            background-color: #fafafa;
+
+            &.header-100{
+                .expansion-panel__header{
+                    width: 100px;
+                }
+            }
+    
+        }
+
+    }
+
+}

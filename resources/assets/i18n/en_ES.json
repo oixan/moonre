@@ -1,0 +1,27 @@
+{
+    "en":{
+        "general": {
+            "logIn": "Log IN",
+            "logOut": "Log Out"
+        },
+        "mood": {
+            "suggestion": "Suggestion",
+            "replayMood": "Replay to Mood",
+            "description2": "More description",
+            "noDescription2": "No more description added",
+            "filter": "Filter",
+            "time": "TIME",
+            "order": "ORDER",
+            "lastWeek": "Last week",
+            "lastMouth": "Last Mouth",
+            "lastYear": "Last Years",
+            "best": "Best",
+            "asc": "Ascendent",
+            "des": "Descendent"
+        },
+        "topbar":{
+            "underDev": "Under Development",
+            "profile": "Profile"
+        }
+    }
+}

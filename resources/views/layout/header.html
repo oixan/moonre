@@ -1,0 +1,49 @@
+<v-toolbar height="50" color="white" fixed clipped-left app>
+
+    <v-toolbar-side-icon class="grey--text lighten-1" @click="menuShow()"></v-toolbar-side-icon>
+
+    <!-- Logo -->
+        <v-toolbar-title class="d-flex flex-gr-1">
+                <div class="d-flex flex-gr-0 align-items-end"> 
+                    <app-logo :pWidth="150"></app-logo>
+                    <div class="grey--text text--lighten-1 ml-3" style="font-size:12px"> {{ $t("topbar.underDev") }} </div>
+                </div>
+        </v-toolbar-title>
+    <!-- End - Logo -->
+
+    <!-- Button Right -->
+        <v-toolbar-items>
+
+                 <!-- Not Logged -->
+                <router-link to="/login" class="text-decoration-none" v-if="!logged">
+                    <div class="d-flex align-center">
+                        <v-btn round outline color="light-blue lighten-1">  {{ $t("general.logIn") }} </v-btn>             
+                    </div>
+                </router-link> 
+                <!-- End - Not Logged -->
+
+                 <!-- Logged -->
+                <div class="d-flex align-center" v-if="logged">
+
+                    <v-menu offset-y close-on-click min-width="160" transition="slide-y-transition">
+                        <v-btn  slot="activator" round outline color="light-blue lighten-1"> {{ userName }} </v-btn>   
+        
+                        <v-list>
+                            <v-list-tile @click="$router.push('/setting')">
+                                    <v-list-tile-title >{{ $t("topbar.profile") }}</v-list-tile-title>
+                            </v-list-tile>
+
+                            <v-divider></v-divider>
+
+                            <v-list-tile @click="logout()">
+                                    <v-list-tile-title >{{ $t("general.logOut") }}</v-list-tile-title>
+                            </v-list-tile>
+                        </v-list>
+                    </v-menu>
+                            
+                </div>
+                <!-- End - Logged -->
+
+        </v-toolbar-items>
+    <!-- End - Button Right -->
+</v-toolbar>

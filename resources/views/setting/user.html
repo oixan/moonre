@@ -1,0 +1,111 @@
+
+<v-container class="pt-5" style="max-width: 800px;">
+    <v-layout row wrap>
+            <v-flex xs12>
+
+                    <v-card class="">
+
+                            <v-card-title class="light-blue lighten-1">
+                                <h2 class="headline mb-0 ml-2 pl-3 white--text">User Setting</h2>
+                            </v-card-title>
+
+                            <v-card-text>
+                                <v-container fluid>
+
+                                    <v-layout row wrap>
+                                        <v-flex xs12 md4>
+                                            <v-subheader>Name:</v-subheader>
+                                        </v-flex>
+                                        <v-flex xs12 md8 pl-3>
+                                            <v-text-field v-model="name" name="name" label="name"></v-text-field>
+                                        </v-flex>
+                                    </v-layout>
+
+                                    <v-layout row wrap>
+                                            <v-flex xs12 md4>
+                                                <v-subheader>Surname:</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs12 md8 pl-3>
+                                                <v-text-field v-model="surname" name="surname" label="surname"></v-text-field>
+                                            </v-flex>
+                                    </v-layout>
+
+                                    <v-layout row wrap>
+                                            <v-flex xs12 md4>
+                                                    <v-subheader>Sex:</v-subheader>
+                                                </v-flex>
+                                                <v-flex xs12 md4 pl-3>
+                                                    <div class="pl-3">
+                                                            <v-radio-group row v-model="sex">
+                                                                    <v-radio @click.native="" color="light-blue lighten-1" label="M" value="m" class="pt-2" ></v-radio>
+                                                                    <v-radio @click.native="" color="light-blue lighten-1" label="F" value="f" class="pt-2"></v-radio>
+                                                            </v-radio-group>
+                                                    </div>
+                                            </v-flex>        
+                                    </v-layout>
+
+                                    <v-layout row wrap>
+                                            <v-flex xs12 md4>
+                                                <v-subheader>State:</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs12 md8 pl-3>
+                                                    <v-select
+                                                        v-model="country"
+                                                        :items="countryList"
+                                                        item-text="value"
+                                                        item-value="code"
+                                                        
+                                                        label="select"
+                                                        autocomplete
+                                                        clearable
+                                                        dense
+                                                  ></v-select>
+                                            </v-flex>
+                                    </v-layout>
+
+                                    <v-layout row wrap>
+                                            <v-flex xs12 md4>
+                                                <v-subheader>City:</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs12 md8 pl-3>
+                                                    <v-select
+                                                        v-model="city"
+                                                        :items="cityList"
+                                                        item-text="city"
+                                                        item-value="id"
+                                                        
+                                                        label="select"
+                                                        autocomplete
+                                                        clearable
+                                                        dense
+                                                  ></v-select>
+                                            </v-flex>
+                                    </v-layout>
+
+                                    <v-layout row wrap>
+                                            <v-flex xs12 md4>
+                                                <v-subheader>Address:</v-subheader>
+                                            </v-flex>
+                                            <v-flex xs12 md8 pl-3>
+                                                <v-text-field v-model="address" name="address" label="address"></v-text-field>
+                                            </v-flex>
+                                    </v-layout>
+
+                                </v-container>
+                            </v-card-text>
+
+                            <v-card-actions class="white pr-3 pb-3">
+                                    <v-spacer></v-spacer>
+                                    <v-btn round color="light-blue lighten-1 white--text" @click="updateUser()">Save</v-btn>
+                            </v-card-actions>
+
+                    </v-card>
+
+                    <v-snackbar :timeout="4000" :bottom="true" v-model="toast">
+                        {{ toastMessage }}
+                        <v-btn flat color="pink" @click.native="toast = false">Close</v-btn>
+                    </v-snackbar>
+
+            </v-flex>
+    </v-layout>
+</v-container>

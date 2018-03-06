@@ -1,0 +1,67 @@
+// Flex Grow
+.flex-gr-0{
+    flex-grow: 0;
+}
+
+.flex-gr-1{
+    flex-grow: 1;
+}
+
+.flex-sh-0{
+    flex-shrink: 0;
+}
+
+.flex-sh-1{
+    flex-shrink: 1;
+}
+
+
+// Flex justify
+.justify-content-start{
+    justify-content: flex-start;
+}
+
+.justify-content-end{
+    justify-content: flex-end;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.justify-content-around{
+    justify-content: space-around;
+}
+
+.justify-content-between{
+    justify-content: space-between;
+}
+
+// Align Item
+.align-items-start{
+    align-items: flex-start;
+}
+
+.align-items-end{
+    align-items: flex-end;
+}
+
+.align-items-center{
+    align-items:  center;
+}
+
+.align-items-stretch{
+    align-items:  stretch;
+}
+
+.align-items-baseline{
+    align-items:  baseline;
+}
+
+
+
+//flex - wrap
+.flex-wrap{
+    flex-wrap: wrap;
+}
+

@@ -1,0 +1,127 @@
+<v-container >
+
+    <!-- Category Swiper -->
+        <v-layout row>
+            <v-flex d-flex xs12 >
+
+                <swiper :options="swiperOption" ref="mySwiper" style="height: 40px;">
+                    <!-- slides -->
+                    <swiper-slide v-for="category of categories" :key="category.id">
+
+                        <v-chip :color="category.color"  :selected="categoryFilter == category.id" text-color="white" @click="categoryFilter = category.id; setFilter()">
+                            <v-icon :color="category.colorIcon">{{ category.icon}}</v-icon>
+                            {{ category.description }}
+                        </v-chip>
+
+                    </swiper-slide>
+
+                    <!-- Optional controls -->
+                    <div class="swiper-button-prev" slot="button-prev"></div>
+                    <div class="swiper-button-next" slot="button-next"></div>
+                </swiper>
+
+            </v-flex>
+        </v-layout>
+    <!-- Category Swiper -->
+
+    <v-layout row class="flex-wrap">
+        <!-- filter list moods -->
+            <v-flex d-flex xs12>
+                    <!-- filter list moods -->
+                        <v-expansion-panel expand>
+    
+                            <v-expansion-panel-content class="header-100">
+                              <div slot="header" style="text-align: right;width: 100px;"> {{ $t("mood.filter") }}</div>
+                              <v-card>
+                                <v-card-text class="grey lighten-5 pa-0">
+
+                                        <v-container class="pa-2 grid-list-xl">
+                                                <v-layout row class="flex-wrap">
+                                                        <v-flex d-flex  md3 style="min-width: 172px;">
+                                                                <!-- Filter Time -->
+                                                                    <v-list dense class="grey lighten-5">
+
+                                                                            <v-subheader class="text-upper grey--text text--darken-4">{{ $t("mood.time") }}</v-subheader>
+
+                                                                            <v-divider></v-divider>
+
+                                                                            <div class="pl-3">
+                                                                                <v-radio-group column v-model="timeFilter" class=" pt-1">
+                                                                                        <v-radio @click.native="setFilter()" color="light-blue lighten-1" :label="$t('mood.lastWeek')" value="7" class="pt-2" ></v-radio>
+                                                                                        <v-radio @click.native="setFilter()" color="light-blue lighten-1" :label="$t('mood.lastMouth')" value="30" class="pt-2"></v-radio>
+                                                                                        <v-radio @click.native="setFilter()" color="light-blue lighten-1" :label="$t('mood.lastYear')" value="360" class="pt-2"></v-radio>
+                                                                                </v-radio-group>
+                                                                            </div>
+
+                                                                    </v-list>
+                                                                <!-- End - Filter Time -->
+                                                        </v-flex>
+
+                                                        <v-flex d-flex md3 style="min-width: 172px;">
+                                                                <!-- Filter Order -->
+                                                                    <v-list dense class="grey lighten-5">
+                                                                            
+                                                                            <v-subheader class="text-upper grey--text text--darken-4">{{$t('mood.order')}}</v-subheader>
+
+                                                                            <v-divider></v-divider>
+
+                                                                            <div class="pl-3">
+                                                                                <v-radio-group column v-model="orderFilter"  class=" pt-1">
+                                                                                        <v-radio @click.native="setFilter()" color="light-blue lighten-1" :label="$t('mood.best')" value="best" class="pt-2"></v-radio>
+                                                                                        <v-radio @click.native="setFilter()" color="light-blue lighten-1" :label="$t('mood.asc')" value="asc" class="pt-2"></v-radio>
+                                                                                        <v-radio @click.native="setFilter()" color="light-blue lighten-1" :label="$t('mood.des')" value="desc" class="pt-2"></v-radio>
+                                                                                </v-radio-group>
+                                                                            </div>
+
+                                                                    </v-list>
+                                                                <!-- End - Filter Order -->
+                                                        </v-flex>
+                                                </v-layout>
+                                        </v-container>
+
+                                </v-card-text>
+                              </v-card>
+                            </v-expansion-panel-content>
+            
+                        </v-expansion-panel>
+                    <!-- end filter list moods -->
+            </v-flex>
+        <!-- filter list moods -->
+    </v-layout>
+
+    <v-layout row>
+
+        <v-flex d-flex xs12>
+
+            <!-- list moods -->
+                <div> 
+                    <div class="masonry-grid" >
+
+                        <div class="masonry-grid-sizer"></div>
+
+                        <div class="masonry-grid-item" v-for="mood in moods">
+                            <app-mood :pMood="mood" :pReportList="reportsList" :pCategories="categories" > </app-mood>              
+                        </div>
+
+                    </div>
+                    
+                    <infinite-loading @infinite="infiniteHandler" :distance="250" spinner="bubbles" force-use-infinite-wrapper="true" ref="infiniteLoading"></infinite-loading>
+                </div>
+            <!-- end - list moods -->
+
+        </v-flex>   
+
+    </v-layout>
+
+    <v-btn fab dark fixed right bottom color="light-blue lighten-1" style="bottom:30px" @click.native.stop="activeAddMood()" >
+            <v-icon dark>add</v-icon>
+    </v-btn>
+
+    <addMoods-modal v-if="addMoodModalActive" :visible="addMoodModalActive" v-on:closeModal="deactiveAddMood($event)" :pMode="0" :pCategory="categories" ></addMoods-modal>
+
+    <v-snackbar :timeout="4000" :bottom="true" v-model="toast">
+            {{ toastMessage }}
+            <v-btn flat color="pink" @click.native="toast = false">Close</v-btn>
+    </v-snackbar>
+    
+</v-container>

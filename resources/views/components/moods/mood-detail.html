@@ -1,0 +1,75 @@
+<v-container grid-list-md text-xs-center>
+        <v-layout row justify-space-around>
+                <v-flex xxs6 md10 lg8 pt-5 style='max-width:900px'>
+
+                        <v-container grid-list-md text-xs-center>
+
+                                <!-- Mood Detail + Comment -->
+                                        <v-layout row justify-space-around flex-wrap>
+
+                                                <!-- Mood Detail -->
+                                                        <v-flex xs12 md6>
+
+                                                                <v-card>
+                                                                        <v-card-title primary-title >
+                                                                                <div style="margin: auto;">
+                                                                                        <app-mood :pMood="mood" :pReportList="reportList" :pCategories="categories" > </app-mood>  
+                                                                                </div>
+                                                                        </v-card-title>
+                                                                        <v-card-title primary-title style="flex-flow: column; align-items: left;">
+                                                                                <h5> {{ $t("mood.description2") }}: </h5>
+                                                                                <p v-if="mood.message2"> {{ mood.message2 }} </p> 
+                                                                                <p v-else > {{ $t("mood.noDescription2") }} </p> 
+                                                                        </v-card-title>
+
+                                                                </v-card>
+
+                                                        </v-flex>
+                                                <!-- Mood Detail -->
+                                                
+                                                <!-- Comment -->
+                                                        <v-flex xs12 md6>
+
+                                                                <v-card class="overflow-mood-comment">
+                                                                        <v-card-title primary-title>
+                                                                                <h3 class="headline mb-0">{{ $t("mood.replayMood") }}</h3>                                                                      
+                                                                        </v-card-title>
+
+                                                                        <v-card-actions>
+                                                                                <div v-if="displayCommment" class="comments" style="display: block; margin-top: 15px; width: 100%;">
+                                                                                        <vue-disqus :title="mood.message.substring(0,20) + '...' " shortname="moonre-com" :url="commentIdentifier"></vue-disqus>
+                                                                                </div>
+                                                                        </v-card-actions>
+                                                                </v-card>
+
+                                                        </v-flex>
+                                                <!-- Comment -->
+
+                                        </v-layout>
+                                <!-- Fine - Mood Detail + Comment -->
+
+                                <!-- Mood Suggestion -->
+                                        <v-layout row justify-space-around flex-wrap >
+                                                <v-flex xs12>
+
+                                                        <v-card>
+                                                                <v-card-title primary-title class="pb-0">
+                                                                        <h3 class="headline mb-0">{{ $t("mood.suggestion") }}</h3>
+                                                                </v-card-title>
+
+                                                                <v-card-text>
+                                                                        <div class="mood-detail-suggesstion">
+                                                                                <app-mood :pMood="moodSuggest" :pReportList="reportList" :pCategories="categories" v-for="moodSuggest in moodsSuggest" :key="moodSuggest.id"> </app-mood> 
+                                                                        </div>
+                                                                </v-card-text>
+                                                        </v-card>
+
+                                                </v-flex>
+                                        </v-layout>
+                                <!-- Fine - Mood Suggestion -->
+
+                        </v-container>
+
+                </v-flex>
+        </v-layout>
+</v-container>

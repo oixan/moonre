@@ -1,0 +1,48 @@
+<div>
+        <!-- Menu User -->
+            <v-list dense>
+
+                <v-list-tile avatar @click="$router.push('/')">
+                        <v-list-tile-action>
+                            <v-icon class="grey--text darken-1">home</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title> HomePage </v-list-tile-title>
+                        </v-list-tile-content>
+                </v-list-tile>
+    
+                <div>
+                    <v-subheader class="text-upper">General</v-subheader>
+    
+                    <v-list-tile avatar  @click="selected = 'user';$router.push('/setting')" :class="[ selected=='user'?'grey':'', selected=='user'?'lighten-3':'' ]">
+                            <v-list-tile-action>
+                                <v-icon class="grey--text darken-1">account_circle</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title> User </v-list-tile-title>
+                            </v-list-tile-content>
+                    </v-list-tile>
+    
+                    <v-list-tile avatar @click="selected = 'resetPassword';$router.push('/setting/passwordReset')" :class="[ selected=='resetPassword'?'grey':'', selected=='resetPassword'?'lighten-3':'' ]">
+                            <v-list-tile-action>
+                                <v-icon class="grey--text darken-1">low_priority</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title> Password Reset </v-list-tile-title>
+                            </v-list-tile-content>
+                    </v-list-tile>
+
+                    <v-list-tile avatar @click="selected = 'deleteAccount';$router.push('/setting/deleteAccount')" :class="[ selected=='deleteAccount'?'grey':'', selected=='deleteAccount'?'lighten-3':'' ]">
+                            <v-list-tile-action>
+                                <v-icon class="grey--text darken-1">delete_forever</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title> Delete Account </v-list-tile-title>
+                            </v-list-tile-content>
+                    </v-list-tile>
+
+                </div>
+            </v-list>
+        <!-- End - Menu User -->
+    
+    </div>

@@ -1,0 +1,27 @@
+{
+    "it":{
+        "general": {
+            "logIn": "Entra",
+            "logOut": "Esci"
+        },
+        "mood": {
+            "suggestion": "Suggerimenti",
+            "replayMood": "Lascia un Commento",
+            "description2": "Descrizione Aggiuntiva",
+            "noDescription2": "Nessuna descrizione aggiuntiva inserita",
+            "filter": "Filtri",
+            "time": "TEMPO",
+            "order": "ORDINE",
+            "lastWeek": "Ultima Settimana",
+            "lastMouth": "Ultimo Mese",
+            "lastYear": "Ultimo Anno",
+            "best": "Migliore",
+            "asc": "Crescente",
+            "des": "Decrescente"
+        },
+        "topbar":{
+            "underDev": "In Sviluppo",
+            "profile": "Profilo"
+        }
+    }
+}

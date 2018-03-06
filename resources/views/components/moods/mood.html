@@ -1,0 +1,152 @@
+<div>
+    <!-- Mood -->    
+        <v-card class="mood" tile flat>
+
+            <v-card-title primary-title class="pb-0 mood-blur">
+                <div>
+                    <p class="text-justify mb-0" style="word-wrap: break-word; max-width: 213px;">{{pMood.message}}</p>
+                </div>
+            </v-card-title>
+
+            <!-- Text/like Mood -->
+                <v-card-actions class="py-0">
+
+                    <p class="flex-gr-1 text-xs-left pl-2 py-2 grey--text" style="font-size: 12px"> {{pMood.created_at}} </p>
+
+                    <!-- Like/category -->
+                        <v-container  grid-list-lg class="pr-1 py-0">
+
+                            <!-- Like -->
+                                <v-layout row wrap>
+                                    <v-flex xs12 class="d-flex align-center pb-0">
+
+                                        <p class="ma-0 text-xs-right" style="display: initial"> {{likeNumber}} </p>
+                                            
+                                        <v-btn icon @click="likeClick()" style="max-width: 36px;"> 
+                                            <v-icon v-if="!liked" color="red darken-2">favorite_border</v-icon>
+                                            <v-icon v-if="liked" color="red darken-2">favorite</v-icon>
+                                        </v-btn>
+
+                                    </v-flex>
+                                </v-layout>
+                            <!-- Like -->
+
+                            <!-- category -->
+                            <v-layout row wrap v-if="category">
+                                <v-flex xs12 class="d-flex align-center pt-0">
+
+                                    <v-chip :color="category.color"  text-color="white" small>
+                                        <v-icon :color="category.colorIcon">{{ category.icon}}</v-icon>
+                                        {{ category.description }}
+                                    </v-chip>
+
+                                </v-flex>
+                            </v-layout>
+                            <!-- category -->
+
+                        </v-container>
+                    <!-- End - Like/category -->
+                    
+                </v-card-actions>
+            <!-- End Text/like Mood -->
+
+            <!-- Bottom Bar --> 
+                <v-card-actions class="mood-footer pa-1">
+
+                        <v-container class="pa-0">
+                                <v-layout row>
+
+                                    <!-- Comments --> 
+                                        <v-flex d-flex xs3 class="justify-content-center">
+                                                <span class="disqus-comment-count grey--text" :data-disqus-url="commentIdentifier" style="flex-grow: 0;text-align: right;"></span>
+                                                <v-btn icon @click="openMoodDetail()"  > 
+                                                    <v-icon color="grey lighten-3">question_answer</v-icon>
+                                                </v-btn>
+                                        </v-flex>
+                                    <!-- End Comments --> 
+
+                                    <!-- Edit / Cancel  --> 
+                                        <v-flex d-flex xs6 class="justify-content-center">
+                                                <v-btn icon @click="activeEditMoodModal()"   v-if="pMood.user_id == userId"> 
+                                                        <v-icon color="grey lighten-3">mode_edit</v-icon>
+                                                </v-btn>
+                                            
+                                                <v-btn icon @click.native="deleteModal = true"   v-if="pMood.user_id == userId"> 
+                                                    <v-icon color="grey lighten-3">delete_forever</v-icon>
+                                                </v-btn>
+                                        </v-flex>
+                                    <!-- End Edit / Cancel --> 
+
+                                    <!-- Report --> 
+                                        <v-flex d-flex xs3 class="justify-content-center">
+                                                <v-btn v-if="!pMood.reported" icon @click="reportModal = true"> 
+                                                        <v-icon color="grey lighten-3">flag</v-icon>
+                                                </v-btn>
+                                                <v-tooltip bottom  v-if="pMood.reported" style="text-align:center">
+                                                    <v-btn icon slot="activator" > 
+                                                            <v-icon color="red lighten-3">flag</v-icon>
+                                                    </v-btn>
+                                                    <span>Mood not showed. Too many report receved</span>
+                                                </v-tooltip>
+                                        </v-flex>
+                                    <!-- End Report --> 
+                                </v-layout>
+                        </v-container>
+
+                </v-card-actions>
+            <!-- End - Bottom Bar -->    
+        </v-card>
+    <!-- End Mood -->    
+
+    <!-- Edit Mood -->
+        <addMoods-modal v-if="editMoodModalActive" :visible="editMoodModalActive" v-on:closeModal="deactiveEditMoodModal($event)" :pMode="1" :pMood="pMood" :pCategory="pCategories"></addMoods-modal>
+    <!-- End Edit Mood -->
+
+    <!-- Delete Mood -->
+        <v-dialog v-model="deleteModal" persistent max-width="490px" >
+            <v-card class="pa-2">
+                <v-card-title class="headline">Are you sure to delete the Mood?</v-card-title>
+                <v-card-text>These operation will delete the mood definitely. Be sure before continue.</v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn round outline color="light-blue lighten-1 white--text" @click.native="deleteModal = false">Cancel</v-btn>
+                    <v-btn round color="light-blue lighten-1 white--text" @click.native="deleteMood(); deleteModal = false;">Agree</v-btn>
+                </v-card-actions>
+            </v-card>
+         </v-dialog>
+    <!-- End Delete Mood -->
+
+    <!-- Report Mood -->
+        <v-dialog v-model="reportModal" persistent max-width="490px">
+            <v-card class="pa-2">
+                <v-card-title class="headline"> Report Mood </v-card-title>
+                <v-card-text>
+                        Tell us your concern about this content so that we can review it to determine whether there has been a violation of the terms of service.
+                        (Abuse of this feature is a violation of the terms of service)
+                </v-card-text>
+                <v-card-text class="pt-0">
+                        <v-radio-group v-model="reportMood" column>
+                            
+                                <v-radio v-for="report of reportsList" :label="report.description" :key="report.id"
+                                        color="light-blue lighten-1"
+                                        :value="report.code">
+
+                                </v-radio>
+
+                        </v-radio-group>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn outline round color="light-blue lighten-1 white--text" @click.native="reportModal = false">Cancel</v-btn>
+                    <v-btn round color="light-blue lighten-1 white--text" @click.native="sendReportMood(); reportModal = false">Agree</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    <!-- Report Mood -->
+
+    <v-snackbar :timeout="4000" :bottom="true" v-model="toast">
+            {{ toastMessage }}
+            <v-btn flat color="pink" @click.native="toast = false">Close</v-btn>
+    </v-snackbar>
+    
+</div>

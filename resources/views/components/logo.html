@@ -1,0 +1,18 @@
+<div>
+    <router-link to="/" >
+
+        <div v-if="forceLargeLogo" >
+            <img src="img/376358360_d4fa546f-aa23-4219-944e-94a1d1fa521f.png" alt="Logo" :style="{'width': width, 'vertical-align': 'middle'}">
+        </div>
+
+        <div v-if="forceLargeLogo == false && forceSmallLogo == false" >
+            <img  class="hidden-xs-only" src="img/376358360_d4fa546f-aa23-4219-944e-94a1d1fa521f.png" alt="Logo" :style="{'width': width, 'vertical-align': 'middle'}">
+            <img  class="hidden-sm-and-up" src="img/376366819_d4420fd3-e9b7-4ac7-8f71-8643e9c754b7MIni.png" alt="Logo" :style="{'width': widthMini, 'max-width': '39px', 'vertical-align': 'middle'}">
+        </div>
+
+        <div v-if="forceSmallLogo" >
+            <img  class="hidden-sm-and-up" src="img/376366819_d4420fd3-e9b7-4ac7-8f71-8643e9c754b7MIni.png" alt="Logo" :style="{'width': widthMini, 'max-width': '39px', 'vertical-align': 'middle'}">
+        </div>
+
+    </router-link>
+</div>

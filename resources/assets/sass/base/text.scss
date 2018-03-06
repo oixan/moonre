@@ -1,0 +1,28 @@
+
+// a - element style
+a{
+    color: $brand-primary;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+a.text-decoration-none, a.list__tile:hover{
+    text-decoration: none ;
+}
+
+.application--light a {
+    color: $brand-primary;
+}
+
+// a - end element style
+
+.text-justify{
+    text-align: justify;
+}
+
+.text-upper{
+    text-transform: uppercase;
+}
+

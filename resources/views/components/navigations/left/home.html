@@ -1,0 +1,36 @@
+<div>
+    <!-- Menu User -->
+        <v-list dense>
+            <v-list-tile avatar  @click="initSetFilter()" >
+                <v-list-tile-action>
+                    <v-icon class="grey--text darken-1">home</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                    <v-list-tile-title> HomePage </v-list-tile-title>
+                </v-list-tile-content>
+            </v-list-tile>
+
+            <div  v-if="logged">
+                <v-subheader class="text-upper">User</v-subheader>
+
+                <v-list-tile avatar  @click="userFilter = 'own';setFilter()" :class="[ userFilter=='own'?'grey':'', userFilter=='own'?'lighten-3':'' ]">
+                        <v-list-tile-action>
+                            <v-icon class="grey--text darken-1">archive</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title> My Mood </v-list-tile-title>
+                        </v-list-tile-content>
+                </v-list-tile>
+
+                <v-list-tile avatar @click="userFilter = 'pref';setFilter()" :class="[ userFilter=='pref'?'grey':'', userFilter=='pref'?'lighten-3':'' ]">
+                        <v-list-tile-action>
+                            <v-icon class="grey--text darken-1">favorite</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title> Prefered </v-list-tile-title>
+                        </v-list-tile-content>
+                </v-list-tile>
+            </div>
+        </v-list>
+    <!-- End - Menu User -->
+</div>
